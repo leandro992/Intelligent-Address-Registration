@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:8
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: address_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wiremock:
+    image: wiremock/wiremock:latest
+    container_name: wiremock
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./wiremock:/home/wiremock
+
+volumes:
+  db_data:
