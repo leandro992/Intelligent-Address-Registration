@@ -4,6 +4,7 @@ import com.intelligent.address.registration.client.CepApiClient;
 import com.intelligent.address.registration.dto.AddressDTO;
 import com.intelligent.address.registration.dto.CepResponseDTO;
 import com.intelligent.address.registration.entity.Address;
+import com.intelligent.address.registration.exception.AddressNotFoundException;
 import com.intelligent.address.registration.repository.AddressRepository;
 import com.intelligent.address.registration.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -30,29 +31,34 @@ public class AddressServiceImpl implements AddressService {
     }
 
     public Address createAddress(String cep) {
-        CepResponseDTO cepResponse = cepApiClient.fetchCepData(cep);
+        List<CepResponseDTO> ceps = cepApiClient.fetchAllCeps();
+        CepResponseDTO dto = ceps.stream()
+                .filter(c -> c.cep().equals(cep))
+                .findFirst()
+                .orElseThrow(() -> new AddressNotFoundException("CEP não encontrado: " + cep));
+
         Address address = Address.builder()
+                .cep(dto.cep())
+                .street(dto.street())
+                .city(dto.city())
+                .state(dto.state())
                 .createdAt(LocalDateTime.now())
-                .cep(cepResponse.cep())
-                .state(cepResponse.state())
-                .street(cepResponse.street())
-                .city(cepResponse.city())
+                .updatedAt(LocalDateTime.now())
                 .build();
+
         return addressRepository.save(address);
     }
-
 
     @Override
     public Address updateAddress(Long id, AddressDTO dto) {
         Address addr = getAddressNotFind(id);
-        Address address = Address.builder()
-                .updatedAt(LocalDateTime.now())
-                .cep(addr.getCep())
-                .state(addr.getState())
-                .street(addr.getStreet())
-                .city(addr.getCity())
-                .build();
-        return addressRepository.save(address);
+        addr.setCep(dto.cep());
+        addr.setState(dto.state());
+        addr.setStreet(dto.street());
+        addr.setCity(dto.city());
+        addr.setUpdatedAt(LocalDateTime.now());
+        return addressRepository.save(addr);
+
     }
 
     @Override

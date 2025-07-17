@@ -1,0 +1,19 @@
+{
+  "request": { "method": "GET", "urlPath": "/ceps" },
+  "response": {
+    "status": 200,
+    "jsonBody": [
+      { "cep": "01310000", "street": "Avenida Paulista", "city": "São Paulo", "state": "SP" },
+      { "cep": "02011234", "street": "Rua Voluntários da Pátria", "city": "São Paulo", "state": "SP" },
+      { "cep": "04567000", "street": "Rua Funchal", "city": "São Paulo", "state": "SP" },
+      { "cep": "08090321", "street": "Rua Arapiraca", "city": "São Paulo", "state": "SP" },
+      { "cep": "04250010", "street": "Rua Silva Bueno", "city": "São Paulo", "state": "SP" },
+      { "cep": "05123456", "street": "Avenida Mutinga", "city": "São Paulo", "state": "SP" },
+      { "cep": "09999888", "street": "Rua das Palmeiras", "city": "Diadema", "state": "SP" },
+      { "cep": "01122333", "street": "Avenida Cruzeiro do Sul", "city": "São Paulo", "state": "SP" },
+      { "cep": "06433210", "street": "Alameda Rio Negro", "city": "Barueri", "state": "SP" },
+      { "cep": "08564222", "street": "Rua das Andorinhas", "city": "Itaquaquecetuba", "state": "SP" }
+    ],
+    "headers": { "Content-Type": "application/json" }
+  }
+}
