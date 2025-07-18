@@ -1,4 +1,8 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   datasource:
     url: jdbc:mysql://db:3306/address_db
     username: user
@@ -9,4 +13,4 @@ spring:
 
 cep:
   api:
-    url: http://wiremock:8080
+    url: http://localhost:3000
