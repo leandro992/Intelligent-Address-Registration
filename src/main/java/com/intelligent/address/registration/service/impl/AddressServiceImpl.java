@@ -52,6 +52,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address updateAddress(Long id, AddressDTO dto) {
         Address addr = getAddressNotFind(id);
+        addr.setId(id);
         addr.setCep(dto.cep());
         addr.setState(dto.state());
         addr.setStreet(dto.street());
