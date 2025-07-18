@@ -70,7 +70,7 @@ public class AddressServiceImpl implements AddressService {
 
     private Address getAddressNotFind(Long id) {
         return addressRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
+                .orElseThrow(() -> new AddressNotFoundException("Endereço não encontrado"));
     }
 
 
